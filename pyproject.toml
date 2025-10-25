@@ -1,0 +1,77 @@
+[tool.poetry]
+name = "network-node"
+version = "0.1.0"
+description = "Онлайн платформа торговой сети электроники"
+authors = ["Dmmitrii Naumov <dmi3naumov@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Django = "^4.2"
+djangorestframework = "^3.14.0"
+psycopg2-binary = "^2.9.9"
+django-filter = "^23.3"
+python-decouple = "^3.8"
+dotenv = "^0.9.9"
+python-dotenv = "^1.0.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.3"
+pytest-django = "^4.7.0"
+pytest-cov = "^4.1.0"
+factory-boy = "^3.3.0"
+faker = "^20.1.0"
+flake8 = "^6.1.0"
+black = "^23.12.0"
+isort = "^5.13.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+addopts = [
+    "--verbose",
+    "--strict-markers",
+    "--cov=network",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--no-migrations",
+    "--reuse-db"
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py311']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # directories
+  \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | build
+  | dist
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 100
+skip_glob = ["**/migrations/*.py"]
+
+[tool.coverage.run]
+omit = [
+    "*/migrations/*",
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__init__.py",
+    "manage.py",
+]
+
