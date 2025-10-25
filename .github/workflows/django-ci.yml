@@ -19,7 +19,7 @@ jobs:
       postgres:
         image: postgres:15-alpine
         env:
-          POSTGRES_NAME: test_db
+          POSTGRES_DB: test_db
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
@@ -73,7 +73,7 @@ jobs:
 
     - name: Check Django settings
       env:
-        POSTGRES_NAME: test_db
+        POSTGRES_DB: test_db
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
         POSTGRES_HOST: localhost
@@ -83,7 +83,7 @@ jobs:
 
     - name: Run migrations
       env:
-        POSTGRES_NAME: test_db
+        POSTGRES_DB: test_db
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
         POSTGRES_HOST: 127.0.0.1
@@ -94,7 +94,7 @@ jobs:
 
     - name: Run tests with coverage
       env:
-        POSTGRES_NAME: test_db
+        POSTGRES_DB: test_db
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: postgres
         POSTGRES_HOST: 127.0.0.1
