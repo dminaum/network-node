@@ -19,7 +19,7 @@ jobs:
       postgres:
         image: postgres:15-alpine
         env:
-          POSTGRES_DB: test_db
+          POSTGRES_NAME: test_db
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
@@ -73,32 +73,32 @@ jobs:
 
     - name: Check Django settings
       env:
-        DB_NAME: test_db
-        DB_USER: postgres
-        DB_PASSWORD: postgres
-        DB_HOST: localhost
-        DB_PORT: 5432
+        POSTGRES_NAME: test_db
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_HOST: localhost
+        POSTGRES_PORT: 5432
         SECRET_KEY: test-secret-key-for-ci
       run: poetry run python manage.py check
 
     - name: Run migrations
       env:
-        DB_NAME: test_db
-        DB_USER: postgres
-        DB_PASSWORD: postgres
-        DB_HOST: 127.0.0.1
-        DB_PORT: 5432
+        POSTGRES_NAME: test_db
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_HOST: 127.0.0.1
+        POSTGRES_PORT: 5432
         SECRET_KEY: test-secret-key
         DEBUG: "True"
       run: poetry run python manage.py migrate
 
     - name: Run tests with coverage
       env:
-        DB_NAME: test_db
-        DB_USER: postgres
-        DB_PASSWORD: postgres
-        DB_HOST: 127.0.0.1
-        DB_PORT: 5432
+        POSTGRES_NAME: test_db
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_HOST: 127.0.0.1
+        POSTGRES_PORT: 5432
         SECRET_KEY: test-secret-key
         DEBUG: "True"
       run: poetry run pytest -v
